@@ -12,35 +12,35 @@ import {
     Flex,
     VStack,
 } from "@chakra-ui/react";
-import { BsPersonFill } from "react-icons/bs";
-import { EventSpeaker } from "../../api";
-import EventSpeakersItem from "./EventSpeakersItem";
-import AddNewSpeakerForm from "./AddNewSpeakerForm";
+import { BsFillPersonCheckFill } from "react-icons/bs";
+import { EventModerator } from "../../api";
+import EventModeratorsItem from "./EventModeratorsItem";
+import AddNewModeratorForm from "./AddNewModeratorForm";
 
 interface Props {
-    speakers: EventSpeaker[];
+    moderators: EventModerator[];
     eventId: string;
 }
 
-const EventSpeakers = ({ speakers, eventId }: Props) => {
+const EventModerators = ({ moderators, eventId }: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
-            <Tooltip label="Oradores">
+            <Tooltip label="Moderadores">
                 <IconButton
                     onClick={onOpen}
-                    aria-label="Oradores"
-                    icon={<BsPersonFill />}
-                    colorScheme={"orange"}
+                    aria-label="Moderadores"
+                    icon={<BsFillPersonCheckFill />}
+                    colorScheme={"red"}
                     size={"sm"}
-                    bgColor="#ff7f00"
+                    bgColor="red"
                 />
             </Tooltip>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent minW={"80vw"} pb={5}>
-                    <ModalHeader>Oradores</ModalHeader>
+                    <ModalHeader>Moderadores</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <Flex
@@ -50,20 +50,20 @@ const EventSpeakers = ({ speakers, eventId }: Props) => {
                             flexDir={{ base: "column", md: "row" }}
                         >
                             <VStack spacing={5} w={{ base: "full", md: "40%" }}>
-                                {speakers.map((s) => (
-                                    <EventSpeakersItem key={s.id} speaker={s} />
+                                {moderators.map((s) => (
+                                    <EventModeratorsItem key={s.id} moderator={s} />
                                 ))}
-                                {!speakers.length && (
+                                {!moderators.length && (
                                     <Text>
-                                        Todavía no añadiste ningún orador
+                                        Todavía no añadiste ningún moderador
                                     </Text>
                                 )}
                             </VStack>
-                            {speakers.length < 6 ? (
-                                <AddNewSpeakerForm eventId={eventId} />
+                            {moderators.length < 6 ? (
+                                <AddNewModeratorForm eventId={eventId} />
                             ) : (
                                 <Text textAlign={"center"}>
-                                    Solo puedes añadir hasta seis oradores,
+                                    Solo puedes añadir hasta seis moderadores,
                                     elimina alguno si quieres agregar otro
                                 </Text>
                             )}
@@ -75,4 +75,4 @@ const EventSpeakers = ({ speakers, eventId }: Props) => {
     );
 };
 
-export default EventSpeakers;
+export default EventModerators;

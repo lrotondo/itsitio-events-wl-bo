@@ -9,8 +9,10 @@ import EventDelete from "./EventDelete";
 import EventLink from "./EventLink";
 import EventSpeakers from "./EventSpeakers";
 import EventSponsors from "./EventSponsors";
+import EventModerator from "./EventModerators";
 import EventEdit from "./EventEdit";
 import EventUsers from "./EventUsers";
+import EventModerators from "./EventModerators";
 
 interface Props {
     event: Event;
@@ -69,6 +71,7 @@ const EventCard = ({ event }: Props) => {
                     eventName={event.title}
                 />
                 <EventSpeakers speakers={event.speakers} eventId={event.id} />
+                <EventModerators moderators={event.moderators} eventId={event.id} />
                 <EventSponsors sponsors={event.sponsors} eventId={event.id} />
                 <EventEdit event={event} />
                 <EventDelete id={event.id} />
